@@ -1,0 +1,46 @@
+buildscript {
+	ext {
+		kotlinVersion = '1.0.6'
+		springBootVersion = '1.5.1.RELEASE'
+        neo4jOgmVersion = '2.1.1'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+	}
+}
+
+apply plugin: 'kotlin'
+//apply plugin: 'kotlin-allopen'
+//apply plugin: 'kotlin-noarg'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'demo-kotlin-neo4j'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-neo4j')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+
+	compile('com.google.guava:guava:19.0')
+	compile('com.google.code.gson:gson:2.7')
+
+	runtime("org.neo4j:neo4j-ogm-http-driver:${neo4jOgmVersion}")
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
